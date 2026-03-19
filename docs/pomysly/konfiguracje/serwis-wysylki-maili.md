@@ -54,3 +54,6 @@ Możliwość wysyłania maili z poziomu Claude Code — np. podsumowania, powiad
 - Claude wysyła maile **wyłącznie na wyraźną prośbę** użytkownika
 - Warto dodać whitelist dozwolonych odbiorców lub wymagać potwierdzenia przed wysyłką
 - Logować każdą wysyłkę (kto, kiedy, do kogo, temat)
+
+
+
