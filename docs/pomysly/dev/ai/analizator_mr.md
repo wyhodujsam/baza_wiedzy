@@ -37,6 +37,33 @@ rules:
     - no_description: true
 ```
 
+## API — porównanie GitHub vs GitLab
+
+Oba providery udostępniają bardzo podobne REST API, co pozwala zbudować wspólny interfejs z dwoma implementacjami.
+
+Dostępne dane w obu: metadane (tytuł, opis, autor, status, daty), diff/zmienione pliki, komentarze, review, statusy CI, labels, assignees.
+
+### Różnice
+
+| Aspekt | GitHub | GitLab |
+|--------|--------|--------|
+| Nazwa | Pull Request | Merge Request |
+| ID | `number` | `iid` |
+| Komentarze | rozdzielone (issue vs review comments) | zunifikowane (`notes`) |
+| Approvale | Reviews API | `/approvals` endpoint |
+| Paginacja | `Link` header | `X-Next-Page` header |
+| Auth | `Bearer ghp_...` | `PRIVATE-TOKEN: glpat-...` |
+
+### Kluczowe endpointy
+
+**GitHub:** `/repos/{owner}/{repo}/pulls`, `.../pulls/{n}/files`, `.../pulls/{n}/comments`, `.../pulls/{n}/reviews`
+
+**GitLab:** `/api/v4/projects/:id/merge_requests`, `.../:iid/changes`, `.../:iid/notes`, `.../:iid/approvals`
+
+### Podejście
+
+Wspólny interfejs (np. `MergeRequestProvider`) z dwoma implementacjami mapującymi na jeden model danych. ~90% logiki analizy będzie współdzielone.
+
 ## Status
 
 Pomysł — do realizacji.

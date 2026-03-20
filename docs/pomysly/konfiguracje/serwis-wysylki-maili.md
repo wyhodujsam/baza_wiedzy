@@ -1,12 +1,23 @@
 # Serwis wysyłki maili dla Claude
 
-**TL;DR:** Postawić lokalny serwis mailowy, przez który Claude mógłby wysyłać maile na prośbę użytkownika z konta SebastianZuk.ai.asystent. Integracja przez API lub CLI.
+**Status:** :white_check_mark: Zrealizowane (2026-03-19)
+
+**TL;DR:** Lokalny serwis mailowy przez `msmtp`, wysyłka z konta `sebastian.zuk.ai.asystent@gmail.com` na prośbę użytkownika.
+
+## Realizacja
+
+- **Wybrane podejście:** msmtp (opcja 4 z analizy poniżej)
+- **Konto:** `sebastian.zuk.ai.asystent@gmail.com`
+- **Konfiguracja:** `~/.msmtprc`
+- **Credentials:** App Password w `~/.config/mail-agent/app-password` (uprawnienia 600)
+- **Logi:** `~/.config/mail-agent/msmtp.log`
+- **Wysyłka:** `echo -e "Subject: ...\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\n\nTreść" | msmtp adres@example.com`
 
 ## Motywacja
 
 Możliwość wysyłania maili z poziomu Claude Code — np. podsumowania, powiadomienia, raporty. Dedykowane konto (ai.asystent) jasno oznacza, że mail pochodzi od asystenta AI.
 
-## Analiza podejść
+## Analiza podejść (archiwalna)
 
 ### 1. SMTP relay + skrypt CLI (najprostsze)
 
@@ -38,22 +49,8 @@ Możliwość wysyłania maili z poziomu Claude Code — np. podsumowania, powiad
 - **Plusy:** zero kodu, instalacja jednym `apt install`, natywnie działa z pipe
 - **Minusy:** brak historii wysłanych, brak UI
 
-## Rekomendacja
-
-**Etap 1:** Zacząć od `msmtp` lub prostego skryptu Python — minimalne, działa od razu.
-**Etap 2:** Jeśli potrzeba historii/logów — Flask mikroserwis z SQLite do logowania wysłanych maili.
-
-## Konfiguracja konta
-
-- Utworzyć konto Google `SebastianZuk.ai.asystent@gmail.com` (lub subdomena własnej domeny)
-- Wygenerować App Password (Google → Security → 2FA → App Passwords)
-- Przechowywać credentials w `~/.config/mail-agent/` z uprawnieniami `600`
-
 ## Bezpieczeństwo
 
 - Claude wysyła maile **wyłącznie na wyraźną prośbę** użytkownika
-- Warto dodać whitelist dozwolonych odbiorców lub wymagać potwierdzenia przed wysyłką
-- Logować każdą wysyłkę (kto, kiedy, do kogo, temat)
-
-
+- Logi każdej wysyłki w `~/.config/mail-agent/msmtp.log`
 
