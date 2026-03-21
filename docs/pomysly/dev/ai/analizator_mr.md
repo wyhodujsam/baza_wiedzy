@@ -66,4 +66,11 @@ Wspólny interfejs (np. `MergeRequestProvider`) z dwoma implementacjami mapując
 
 ## Status
 
-Pomysł — do realizacji.
+**Zrealizowany** — aplikacja działa jako [mr-analizer](../../../apps/mr-analizer.md).
+
+- Repo: [github.com/wyhodujsam/mr-analizer](https://github.com/wyhodujsam/mr-analizer)
+- Stack: Java 17 + Spring Boot 3.2 (backend), React 18 + TypeScript (frontend)
+- Port: 8083 (backend), 3000 (frontend dev)
+- Architektura heksagonalna, SDD + BDD (Cucumber)
+- Zaimplementowane: GitHub adapter, scoring (exclude/boost/penalize), Claude CLI adapter, dashboard React z wykresami, cache, historia analiz per PR
+- Do zrobienia: adapter GitLab, wykresy trendów, filtrowanie po autorze, eksport CSV/PDF, tryb CI
