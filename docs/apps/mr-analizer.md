@@ -43,6 +43,8 @@ Alias: `mra-restart` (w ~/.bashrc)
 
 ## Funkcje
 
+### Analiza PR (główny moduł)
+
 - **Przeglądanie MR/PR** — lista PR z GitHub bez scoringu, z checkboxami do selekcji
 - **Analiza scoring** — reguły exclude/boost/penalize z konfigurowalnymi wagami
 - **Verdicts** — AUTOMATABLE / MAYBE / NOT_SUITABLE z kolorowym badge
@@ -54,6 +56,16 @@ Alias: `mra-restart` (w ~/.bashrc)
 - **Cache browse** — cachowanie listy PR z przyciskiem odświeżania
 - **Persystencja** — H2 file-based, dane przetrwają restart
 
+### Aktywność kontrybutora (odseparowany moduł)
+
+Dashboard analizy aktywności użytkownika w repozytorium — wykrywanie nieprawidłowości:
+
+- **6 reguł wykrywania** (Strategy pattern): za duże PR, szybki merge, praca weekendowa/nocna, brak review, self-merge
+- **Heatmapa aktywności** — SVG grid w stylu GitHub (13 tygodni, 5 poziomów koloru, tooltip, drill-down)
+- **Klikalne badge severity** — filtrowanie tabeli flag
+- **Statystyki** — średni rozmiar PR, czas review, % pracy weekendowej
+- Route: `/activity`, osobne API: `/api/activity/{owner}/{repo}/...`
+
 ## Architektura heksagonalna
 
 ```
@@ -63,4 +75,10 @@ adapter/in/rest/ # REST API (Spring controllers)
 adapter/out/     # GitHub (WebClient), LLM (Claude CLI), JPA (H2)
 ```
 
-Wymienne adaptery przez porty: MergeRequestProvider (GitHub, przyszły GitLab), LlmAnalyzer (Claude CLI, NoOp, przyszłe API).
+Wymienne adaptery przez porty: MergeRequestProvider (GitHub, przyszły GitLab), LlmAnalyzer (Claude CLI, NoOp, przyszłe API), ReviewProvider (GitHub reviews).
+
+## Testy
+
+- **413 testów** (293 backend + 120 frontend), 0 failures
+- BDD: 53 scenariusze Cucumber w 8 plikach .feature
+- Unit: JUnit 5 + Mockito (backend), Vitest + RTL (frontend)

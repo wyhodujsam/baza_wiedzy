@@ -9,7 +9,7 @@
 | **Katalog** | `~/java-token-benchmark` |
 | **Stack** | Java 17, Spring Boot 3.x, JavaParser, Anthropic API, JUnit 5 |
 | **Port** | 8084 |
-| **Repo** | — (lokalne) |
+| **Repo** | [github.com/wyhodujsam/java-token-benchmark](https://github.com/wyhodujsam/java-token-benchmark) (private) |
 
 ## Opis
 
@@ -34,4 +34,5 @@ cd ~/java-token-benchmark && mvn spring-boot:run
 
 ## Powiązane
 
+- [Wyniki analizy](java-token-benchmark-wyniki.md) — benchmark 30 klas × 7 poziomów
 - [Pomysł w KB](../pomysly/dev/ai/optymalizacja_zuzycia_tokenow/rekonstrukcja_kodu_java.md)
