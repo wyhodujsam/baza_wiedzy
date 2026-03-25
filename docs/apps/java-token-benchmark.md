@@ -34,5 +34,7 @@ cd ~/java-token-benchmark && mvn spring-boot:run
 
 ## Powiązane
 
-- [Wyniki analizy](java-token-benchmark-wyniki.md) — benchmark 30 klas × 7 poziomów
+- [Wyniki analizy szkieletów](java-token-benchmark-wyniki.md) — benchmark 30 klas × 7 poziomów
+- [Wyniki benchmarku docs](java-token-benchmark-wyniki-docs.md) — 7 trybów generowania dokumentacji (jsk + template-llm)
+- [doc-generator](doc-generator.md) — statyczny analizator Java (Phase 1 template-llm)
 - [Pomysł w KB](../pomysly/dev/ai/optymalizacja_zuzycia_tokenow/rekonstrukcja_kodu_java.md)
