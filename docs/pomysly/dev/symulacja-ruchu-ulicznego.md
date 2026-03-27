@@ -2,30 +2,49 @@
 
 ## TL;DR
 
-Aplikacja webowa symulująca ruch uliczny w celu badania przyczyn powstawania korków. Samochody poruszają się po zdefiniowanych pasach z ustaloną prędkością. Stack: Java 17 + Spring Boot (backend), React + TypeScript (frontend). Podejście spec-kit.
+Aplikacja webowa symulująca ruch uliczny w celu badania przyczyn powstawania korków. Widok z gory (top-down). Samochody (prostokaty) przyspieszaja i zwalniaja z indywidualnymi parametrami, jada w odstepach. Stack: Java 17 + Spring Boot (backend), React + TypeScript (frontend), WebSocket. Podejscie GSD (get-shit-done).
 
-## Pomysł
+## Pomysl
 
-Interaktywna symulacja ruchu drogowego, w której:
+Interaktywna symulacja ruchu drogowego, w ktorej:
 
-- **Samochody** poruszają się po ustalonych pasach z zadaną prędkością
-- **Pasy ruchu** mają zdefiniowaną geometrię (kierunek, długość, połączenia)
-- **Skrzyżowania** regulują przepływ (sygnalizacja świetlna, pierwszeństwo)
-- Celem jest obserwacja i analiza **jak powstają korki** — nawet bez wypadków czy zdarzeń
+- **Samochody** poruszaja sie po ustalonych pasach, przyspieszaja i zwalniaja do zadanej predkosci
+- **Pasy ruchu** — drogi wielopasmowe, samochody zmieniaja pasy
+- **Skrzyzowania** — sygnalizacja swietlna, ronda, pierwszenstwo z prawej strony
+- **Przeszkody** — blokuja caly pas, mozna je dodawac/usuwac w trakcie symulacji
+- **Zwezenia** — redukcja liczby pasow
+- Celem jest obserwacja i analiza **jak powstaja korki** — nawet bez wypadkow czy zdarzen
 
-### Co chcemy zbadać
+### Co chcemy zbadac
 
-- **Phantom traffic jams** — korki powstające "z niczego" (efekt falowy)
-- Wpływ gęstości ruchu na przepustowość
-- Jak zmiana cykli sygnalizacji wpływa na płynność
-- Efekt jednego hamującego pojazdu na cały pas (propagacja fali)
+- **Phantom traffic jams** — korki powstajace "z niczego" (efekt falowy)
+- Wplyw gestosci ruchu na przepustowosc
+- Jak zmiana cykli sygnalizacji wplywa na plynnosc
+- Efekt jednego hamujacego pojazdu na caly pas (propagacja fali)
+- Wplyw przeszkod i zwezen na tworzenie sie zatorow
 
 ### Model symulacji
 
-- Każdy pojazd ma: pozycję, prędkość, pas, kierunek
-- Pojazd dostosowuje prędkość do pojazdu przed sobą (car-following model)
-- Zmiana pasa z prostymi regułami (jeśli wolny pas obok, można zmienić)
+- Kazdy pojazd ma: pozycje, predkosc, pas, kierunek, **max predkosc, przyspieszenie, sile hamowania**
+- Pojazd przyspieszaja i zwalnia do zadanej predkosci (nie teleportuje sie do niej)
+- Pojazd dostosowuje predkosc do pojazdu przed soba (car-following model) — jada w odstepach
+- Zmiana pasa z prostymi regulami (jesli wolny pas obok, mozna zmienic)
 - Tick-based simulation — backend liczy stan, frontend renderuje
+- Samochody przedstawione jako **prostokaty** (widok z gory)
+
+### Widok i interakcja
+
+- **Widok z gory** (top-down, jak na mapie)
+- **Mapa**: predefiniowane scenariusze + wczytywanie z konfiguracji (JSON)
+- **Docelowo**: edytor map (ekran do rysowania drog)
+- **Kontrolki w trakcie symulacji**:
+    - Start / Stop / Pauza
+    - Predkosc symulacji
+    - Dodawanie / usuwanie przeszkod na zywo
+    - Zmiana cykli swiatel
+    - Spawn rate nowych aut
+    - Maksymalna predkosc samochodow
+- **Panel statystyk**: srednia predkosc, gestosc, przepustowosc
 
 ## Stack technologiczny
 
@@ -34,56 +53,55 @@ Interaktywna symulacja ruchu drogowego, w której:
 | Backend | Java 17, Spring Boot 3.x |
 | Frontend | React 18, TypeScript |
 | Komunikacja | WebSocket (real-time update stanu symulacji) |
-| Rendering | HTML5 Canvas lub SVG |
+| Rendering | HTML5 Canvas (widok z gory) |
 | Build | Maven (backend), Vite (frontend) |
-
-## Podejście: spec-kit
-
-Budowa według metodologii spec-kit:
-
-1. **Specification** — opis wymagań i reguł symulacji
-2. **Architecture** — podział na moduły (silnik symulacji, API, UI)
-3. **Tasks** — breakdown na implementowalne zadania
-4. **Implementation** — krok po kroku z testami
 
 ## Architektura (szkic)
 
 ```
 ┌─────────────────────────────────┐
 │          React + TS             │
-│  Canvas/SVG rendering           │
-│  Kontrolki (start/stop/speed)   │
+│  Canvas rendering (top-down)    │
+│  Kontrolki + panel statystyk    │
 └──────────┬──────────────────────┘
            │ WebSocket
 ┌──────────┴──────────────────────┐
 │       Spring Boot API           │
 │  SimulationController           │
 │  WebSocketConfig                │
+│  MapConfigLoader (JSON)         │
 └──────────┬──────────────────────┘
            │
 ┌──────────┴──────────────────────┐
 │     Silnik symulacji            │
 │  Road / Lane / Vehicle          │
 │  TrafficLight / Intersection    │
+│  Roundabout / Obstacle          │
 │  SimulationEngine (tick loop)   │
 └─────────────────────────────────┘
 ```
 
 ## Kluczowe klasy (backend)
 
-- `Vehicle` — pozycja, prędkość, pas, reguły hamowania
-- `Lane` — lista pojazdów, kierunek, prędkość max
-- `Road` — kolekcja pasów
-- `Intersection` — połączenie dróg, sygnalizacja
-- `TrafficLight` — cykl zielone/czerwone
-- `SimulationEngine` — główna pętla tick, aktualizacja stanu
-- `SimulationState` — snapshot do wysłania przez WebSocket
+- `Vehicle` — pozycja, predkosc, max predkosc, przyspieszenie, hamowanie, pas, kierunek
+- `Lane` — lista pojazdow, kierunek, predkosc max
+- `Road` — kolekcja pasow, obsluga zwezen
+- `Intersection` — polaczenie drog, sygnalizacja, pierwszenstwo z prawej
+- `Roundabout` — rondo z regulami wjazdu/wyjazdu
+- `TrafficLight` — cykl zielone/czerwone, konfigurowalne czasy
+- `Obstacle` — przeszkoda blokujaca pas
+- `SimulationEngine` — glowna petla tick, aktualizacja stanu
+- `SimulationState` — snapshot do wyslania przez WebSocket
+- `MapConfig` — konfiguracja mapy (drogi, skrzyzowania, pasy) ladowana z JSON
 
-## Następne kroki
+## Nastepne kroki
 
-- [ ] Napisać spec (spec-kit: specification.md)
-- [ ] Zaprojektować architekturę (architecture.md)
-- [ ] Rozbić na taski (tasks.md)
-- [ ] MVP: jeden prosty odcinek drogi, N samochodów, bez skrzyżowań
-- [ ] Dodać skrzyżowania i sygnalizację
-- [ ] Dodać wizualizację heatmapy korków
+- [ ] Inicjalizacja projektu przez GSD (new-project)
+- [ ] MVP: prosty odcinek drogi wielopasmowej, N samochodow, przyspieszanie/hamowanie
+- [ ] Dodac skrzyzowania (swiatla + pierwszenstwo z prawej)
+- [ ] Dodac ronda
+- [ ] Dodac przeszkody i zwezenia
+- [ ] Wczytywanie map z JSON
+- [ ] Panel statystyk (srednia predkosc, gestosc, przepustowosc)
+- [ ] Edytor map
+- [ ] Wizualizacja heatmapy korkow
