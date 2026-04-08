@@ -6,7 +6,7 @@
 
 - **Backend:** Java 17, Spring Boot 3.2.5, Spring Data JPA, H2
 - **Frontend:** React 18, TypeScript, Vite 5, Recharts
-- **Port:** 8085 (backend), 3000 (frontend dev)
+- **Port:** 8085 (backend), 3005 (frontend dev)
 - **Katalog:** `~/public-goods-game`
 
 ## Uruchomienie
@@ -15,7 +15,7 @@
 export ANTHROPIC_API_KEY=sk-ant-...
 cd ~/public-goods-game/backend && mvn spring-boot:run
 # osobny terminal:
-cd ~/public-goods-game/frontend && npx vite --host 0.0.0.0 --port 3000
+cd ~/public-goods-game/frontend && npx vite
 ```
 
 ## Funkcjonalności
