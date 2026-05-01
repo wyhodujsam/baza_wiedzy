@@ -66,11 +66,30 @@ Wspólny interfejs (np. `MergeRequestProvider`) z dwoma implementacjami mapując
 
 ## Status
 
-**Zrealizowany** — aplikacja działa jako [mr-analizer](../../../apps/mr-analizer.md).
+**Zrealizowany** — aplikacja działa jako [mr-analizer](../../../aplikacje/mr-analizer.md).
 
 - Repo: [github.com/wyhodujsam/mr-analizer](https://github.com/wyhodujsam/mr-analizer)
-- Stack: Java 17 + Spring Boot 3.2 (backend), React 18 + TypeScript (frontend)
+- Stack: Java 17 + Spring Boot 3.2 (backend), React 18 + TypeScript + Vite 6 (frontend)
 - Port: 8083 (backend), 3000 (frontend dev)
 - Architektura heksagonalna, SDD + BDD (Cucumber)
-- Zaimplementowane: GitHub adapter, scoring (exclude/boost/penalize), Claude CLI adapter, dashboard React z wykresami, cache, historia analiz per PR
-- Do zrobienia: adapter GitLab, wykresy trendów, filtrowanie po autorze, eksport CSV/PDF, tryb CI
+- Zaimplementowane:
+    - **Providery VCS**: GitHub + GitLab (wymienne przez `MergeRequestProvider`)
+    - **Multi-LLM**: Claude CLI, Anthropic API, OpenAI API, LLM Proxy (np. corporate Claude przez `bazooka-cloud-h2m`)
+    - **Async analysis**: `POST /api/analysis` zwraca 202 ACCEPTED z raportem `IN_PROGRESS`, scoring + LLM dzieją się w tle, klient pollluje GET aż status = `COMPLETED`/`FAILED`
+    - **Quick Analyze MR po linku** — `MrUrlParser` + `analyzeByUrl`/`analyzeByLink` (parsuje GitHub/GitLab URL, w tym custom domeny i subgroupy)
+    - **Scoring** — exclude/boost/penalize z konfigurowalnymi wagami, score breakdown w UI
+    - **Verdicts** — AUTOMATABLE / MAYBE / NOT_SUITABLE z badge + wykres kołowy
+    - **Tracking kosztów LLM** — per analiza (`LlmCost`)
+    - **Project analysis** (`/project`) — agregacja wyników na poziomie projektu, persystencja w `JpaProjectAnalysisRepository`
+    - **Activity dashboard** (`/activity`) — analiza aktywności kontrybutora lub całego zespołu, heatmapa SVG, bar chart z linią trendu, 6+ reguł wykrywania (large PR, quick review, weekend/night work, no review, self-merge, hotfix, draft/WIP merged, time-to-first-review, review iterations), snapshoty TTL 15 min
+    - **Struktura organizacji** (`/org`) — drzewo Department → Team → Contributor, filtrowanie analiz po `scopeNodeId`
+    - **GitHub reviews** — `GitHubReviewAdapter` integruje informacje o reviewach
+    - **Diagnostics endpoint** + `SqlStatsResponse`
+    - **Cache browse** — listy PR z przyciskiem odświeżania
+    - **Quality**: PMD, SpotBugs (w pom.xml + `pmd-rules.xml`, `spotbugs-exclude.xml`)
+    - **Testy**: 855 (641 backend + 214 frontend), 173 scenariusze BDD, e2e Playwright
+- Do zrobienia (`@wip`):
+    - `analyze-mr-by-link` — pełny frontend flow z walidacją (13 scenariuszy spec już jest, brak step-defs)
+    - Incremental refresh w `activity-cache` — obecny `refreshCache` czyści cache i robi full fetch zamiast incremental
+    - Logika flag w `activity-analysis` — generuje warningi gdzie nie powinna ("Brak nieprawidłowości")
+    - Eksport CSV/PDF, tryb CI

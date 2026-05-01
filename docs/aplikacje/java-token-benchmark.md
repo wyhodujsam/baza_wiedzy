@@ -6,7 +6,7 @@
 
 | | |
 |---|---|
-| **Katalog** | `~/java-token-benchmark` |
+| **Katalog** | `~/apps/java-token-benchmark` |
 | **Stack** | Java 17, Spring Boot 3.x, JavaParser, Anthropic API, JUnit 5 |
 | **Port** | 8084 |
 | **Repo** | [github.com/wyhodujsam/java-token-benchmark](https://github.com/wyhodujsam/java-token-benchmark) (private) |
@@ -29,7 +29,7 @@ SDD (Spec-Driven Development) — pełny flow: specify → plan → tasks → im
 ## Uruchomienie
 
 ```bash
-cd ~/java-token-benchmark && mvn spring-boot:run
+cd ~/apps/java-token-benchmark && mvn spring-boot:run
 ```
 
 ## Powiązane

@@ -6,7 +6,7 @@
 
 | Parametr | Wartość |
 |----------|---------|
-| Lokalizacja | `~/wyhodujsam/garden-serivce/` |
+| Lokalizacja | `~/apps/wyhodujsam/garden-serivce/` |
 | Port | 9999 |
 | Branch | `prod_11_04_2021` |
 | Repo | `github.com/wyhodujsam/wyhodujsam.git` |
@@ -36,7 +36,7 @@ Controller → Service → DAO (impl) → JPA/Hibernate
 
 ## SDD (Spec-Driven Development)
 
-Projekt używa GitHub Spec Kit. Specyfikacje w `~/wyhodujsam/specs/`.
+Projekt używa GitHub Spec Kit. Specyfikacje w `~/apps/wyhodujsam/specs/`.
 
 ## Uwagi
 

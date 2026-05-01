@@ -64,7 +64,7 @@ Wspólna cecha: klasy z wieloma krótkimi zmiennymi (np. DTO z polami `id`, `nam
 
 ## Surowe dane
 
-Pełny CSV: `~/java-token-benchmark/reports/full-benchmark.csv`
+Pełny CSV: `~/apps/java-token-benchmark/reports/full-benchmark.csv`
 
 ## Powiązane
 

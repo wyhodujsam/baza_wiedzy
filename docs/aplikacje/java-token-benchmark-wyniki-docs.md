@@ -43,7 +43,7 @@ Dwufazowy pipeline:
 - **MINIFIED najgorszy** — jednoliterowe zmienne zaciemniają semantykę, 79 tur vs 52 baseline
 - **Szablon nie oszczędza tokenów** — LLM i tak czyta źródła; wartość szablonu = checklist completeness
 
-Paper: `~/java-token-benchmark/benchmark-docs/paper-template-llm.pdf`
+Paper: `~/apps/java-token-benchmark/benchmark-docs/paper-template-llm.pdf`
 
 ## Powiązane
 

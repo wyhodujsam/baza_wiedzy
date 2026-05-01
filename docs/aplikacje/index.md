@@ -1,6 +1,6 @@
 # Aplikacje
 
-> **TL;DR:** Spis wszystkich self-hosted aplikacji — stack, porty, sposób uruchomienia. Wszystkie dostępne przez Tailscale.
+> **TL;DR:** Spis wszystkich self-hosted aplikacji — stack, porty, sposób uruchomienia. Wszystkie dostępne przez Tailscale. Kod w `~/apps/`.
 
 | Aplikacja | Port | Stack |
 |-----------|------|-------|

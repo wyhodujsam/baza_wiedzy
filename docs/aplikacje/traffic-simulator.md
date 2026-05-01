@@ -6,7 +6,7 @@
 
 | | |
 |---|---|
-| **Katalog** | `~/traffic-simulator` |
+| **Katalog** | `~/apps/traffic-simulator` |
 | **Repo** | [wyhodujsam/traffic-simulator](https://github.com/wyhodujsam/traffic-simulator) |
 | **Port backend** | 8086 |
 | **Port frontend** | 5173 |
@@ -17,10 +17,10 @@
 
 ```bash
 # Backend
-cd ~/traffic-simulator/backend && mvn spring-boot:run
+cd ~/apps/traffic-simulator/backend && mvn spring-boot:run
 
 # Frontend (osobny terminal)
-cd ~/traffic-simulator/frontend && npx vite --host 0.0.0.0
+cd ~/apps/traffic-simulator/frontend && npx vite --host 0.0.0.0
 ```
 
 Otworz `http://localhost:5173` (lub przez Tailscale).

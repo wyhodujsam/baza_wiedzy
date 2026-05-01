@@ -2,6 +2,9 @@
 
 > **TL;DR:** Diagramy Mermaid pokazujące architekturę heksagonalną MR Analizer — warstwy domain/application/adapter, porty, adaptery i przepływ danych. Renderują się natywnie w MkDocs.
 
+!!! warning "Diagram nieaktualny"
+    Diagram pochodzi sprzed importu z 2026-05-01 — nie obejmuje modułów `project/`, `activity/`, `org/`, dodatkowych adapterów LLM (Anthropic, OpenAI, LLM Proxy) ani GitLab provider. Funkcje opisane są w [mr-analizer.md](mr-analizer.md).
+
 ## Diagram komponentów (architektura heksagonalna)
 
 ```mermaid

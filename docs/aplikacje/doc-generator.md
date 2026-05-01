@@ -6,7 +6,7 @@
 
 | | |
 |---|---|
-| **Katalog** | `~/doc-generator/` |
+| **Katalog** | `~/apps/doc-generator/` |
 | **Stack** | Python 3, regex (bez AST parsera) |
 | **Port** | — (CLI tool, nie serwer) |
 | **Repo** | [github.com/wyhodujsam/doc-generator](https://github.com/wyhodujsam/doc-generator) (private) |
@@ -39,11 +39,11 @@ Skrypt `analyze.py` parsuje pliki `.java` i generuje 4 pliki dokumentacji Markdo
 ## Uruchomienie
 
 ```bash
-python3 ~/doc-generator/analyze.py <source_dir> <output_dir>
+python3 ~/apps/doc-generator/analyze.py <source_dir> <output_dir>
 
 # Przykład:
-python3 ~/doc-generator/analyze.py \
-  ~/wyhodujsam/garden-serivce/src/main/java \
+python3 ~/apps/doc-generator/analyze.py \
+  ~/apps/wyhodujsam/garden-serivce/src/main/java \
   /tmp/doc-output
 ```
 
@@ -52,7 +52,7 @@ python3 ~/doc-generator/analyze.py \
 Dwufazowy pipeline: static analysis → LLM enrichment:
 
 ```bash
-cd ~/java-token-benchmark/benchmark-docs && bash run-template-llm.sh
+cd ~/apps/java-token-benchmark/benchmark-docs && bash run-template-llm.sh
 ```
 
 Phase 1 (free): analyze.py generuje szablon. Phase 2 (LLM): Claude uzupełnia opisy biznesowe, sekwencje, field usage, auth analysis.
