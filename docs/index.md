@@ -1,17 +1,22 @@
 # Baza Wiedzy
 
-Witaj w bazie wiedzy. Dodawaj pliki `.md` do katalogu `docs/`, a pojawią się automatycznie w nawigacji.
+## Sekcje
 
-## Zawartość
+- [Aplikacje](aplikacje/index.md) — spis aplikacji (stack, porty, uruchomienie). Kod w `~/apps/`.
+- [Prezentacje](prezentacje/index.md) — slajdy, materiały i nagrania z wystąpień. Pliki w `~/prezentacje/`.
+- [Pomysły](pomysly/index.md) — pomysły do zbadania i rozwinięcia (dev, biznes, management, konfiguracje).
+- [Research](research/index.md) — eksperymenty, benchmarki, analizy techniczne. Surowe dane w `~/research/`.
+- [How-to](howto/index.md) — poradniki i zasady pracy z bazą wiedzy.
+- [Tagi](tags.md) — przeglądaj treści po tagach.
 
-- [Aplikacje](apps/index.md) — spis aplikacji (stack, porty, uruchomienie)
-- [Pomysły](pomysly/index.md) — pomysły do zbadania i rozwinięcia
-- [Wyniki analiz](wyniki-analiz/index.md) — eksperymenty, benchmarki, analizy techniczne
-- [How-to](howto/index.md) — poradniki i zasady
-- [Tagi](tags.md) — przeglądaj treści po tagach
+## Konwencja
 
-## Jak korzystać
+Każda sekcja w KB odpowiada katalogowi na dysku 1:1:
 
-- Dodaj pliki markdown do `~/mkdocs-kb/docs/`
-- Możesz tworzyć podkatalogi dla kategorii
-- Strona odświeża się automatycznie po zmianach
+| KB | Dysk |
+|----|------|
+| `aplikacje/X.md` | `~/apps/X/` |
+| `prezentacje/X.md` | `~/prezentacje/X/` |
+| `research/X/` | `~/research/X/` |
+
+Pliki markdown wrzucać do `~/apps/mkdocs-kb/docs/` (strona odświeża się automatycznie).

@@ -1,0 +1,241 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stanowisko sebastian-AI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+</head><body><style>
+:root{
+  --paper:#F3F4F0; --card:#FFFFFF; --ink:#1E2430; --ink-2:#4B5563; --ink-3:#7A8290; --rule:#D5D9D2;
+  --claude:#6B3FA0; --claude-bg:#F1EAF8; --codex:#1F7A6D; --codex-bg:#E6F2EF;
+  --net:#3B5B8C; --net-bg:#E9EEF6; --infra:#6E7A3A; --infra-bg:#EFF1E4; --cloud:#8A5A1E; --cloud-bg:#F6EFE3;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --disp:'IBM Plex Sans Condensed','Arial Narrow',sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#14171C; --card:#1D2128; --ink:#E8EAEE; --ink-2:#B4BAC5; --ink-3:#7F8794; --rule:#333944;
+  --claude:#B99BE0; --claude-bg:#2A2138; --codex:#6FC4B3; --codex-bg:#17302C;
+  --net:#8FAEE0; --net-bg:#1C2738; --infra:#B7C56E; --infra-bg:#262B18; --cloud:#E0B26E; --cloud-bg:#332818;
+}}
+:root[data-theme="dark"]{
+  --paper:#14171C; --card:#1D2128; --ink:#E8EAEE; --ink-2:#B4BAC5; --ink-3:#7F8794; --rule:#333944;
+  --claude:#B99BE0; --claude-bg:#2A2138; --codex:#6FC4B3; --codex-bg:#17302C;
+  --net:#8FAEE0; --net-bg:#1C2738; --infra:#B7C56E; --infra-bg:#262B18; --cloud:#E0B26E; --cloud-bg:#332818;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.45;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding:20px 14px 48px}
+header{margin-bottom:18px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1.05;margin:4px 0 8px;text-wrap:balance}
+.lead{color:var(--ink-2);font-size:15px;max-width:60ch;margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:14px 0 4px;font-size:12px;color:var(--ink-2)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+
+.tier{position:relative;border:1.5px solid var(--c);background:var(--bg);border-radius:6px;padding:12px 12px 12px}
+.tier>h2{font-family:var(--disp);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--c);margin:0 0 8px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.tier>h2 small{font-family:var(--mono);font-size:11px;letter-spacing:0;text-transform:none;color:var(--ink-3);font-weight:400}
+.t-net{--c:var(--net);--bg:var(--net-bg)} .t-claude{--c:var(--claude);--bg:var(--claude-bg)}
+.t-codex{--c:var(--codex);--bg:var(--codex-bg)} .t-infra{--c:var(--infra);--bg:var(--infra-bg)} .t-cloud{--c:var(--cloud);--bg:var(--cloud-bg)}
+
+.box{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:10px 11px}
+.box h3{font-family:var(--disp);font-size:16px;font-weight:600;margin:0 0 4px;line-height:1.15}
+.box h3 .tag{font-family:var(--mono);font-size:10.5px;font-weight:500;padding:1px 6px;border-radius:3px;color:var(--c);border:1px solid var(--c);vertical-align:2px;margin-left:6px;white-space:nowrap}
+.box p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.box ul{margin:6px 0 0;padding-left:16px;font-size:13px;color:var(--ink-2)}
+.box li{margin:2px 0}
+.box code,.link code{font-family:var(--mono);font-size:12px;background:var(--paper);padding:0 4px;border-radius:2px;color:var(--ink)}
+.grid{display:grid;gap:10px}
+@media (min-width:560px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:1fr 1fr 1fr}}
+
+.link{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:6px 0;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);text-align:center}
+.link::before,.link::after{content:"";border-left:2px dashed var(--rule);height:22px;justify-self:center}
+.link span{max-width:56ch;color:var(--ink-2)}
+.link.solid::before,.link.solid::after{border-left-style:solid}
+
+.laptop{border:2px solid var(--ink);border-radius:8px;padding:12px;background:var(--card)}
+.laptop>h2{font-family:var(--disp);font-size:20px;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.laptop>h2 small{font-family:var(--mono);font-size:11px;color:var(--ink-3);font-weight:400}
+.laptop .spec{font-size:12.5px;color:var(--ink-2);margin:0 0 12px}
+.bridge{display:grid;grid-template-columns:1fr;gap:0;margin:8px 0}
+.bridge .arr{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);padding:6px 4px}
+.bridge .arr b{font-weight:500;color:var(--ink)}
+.bridge .arr i{flex:1;border-top:2px solid var(--rule);min-width:20px;display:block}
+.stack{display:grid;gap:10px}
+.cron{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px;color:var(--ink-2);margin:6px 0 0}
+.cron code{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.note{margin-top:22px;border-top:1px solid var(--rule);padding-top:12px;font-size:13px;color:var(--ink-2)}
+.note b{color:var(--ink);font-weight:600}
+
+.flow{margin-top:28px}
+.flow>h2{font-family:var(--disp);font-size:24px;margin:0 0 4px}
+.flow>p{margin:0 0 12px;color:var(--ink-2);font-size:14px;max-width:62ch}
+.steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--rule);margin-left:10px}
+.steps li{position:relative;padding:0 0 14px 18px}
+.steps li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--c);border:2px solid var(--paper)}
+.who{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--c);border:1px solid var(--c);border-radius:3px;padding:1px 6px;margin-bottom:3px;background:var(--card)}
+.steps li p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.steps li p b{color:var(--ink);font-weight:600}
+.steps li .meta{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:2px}
+.a-net{--c:var(--net)} .a-claude{--c:var(--claude)} .a-codex{--c:var(--codex)} .a-infra{--c:var(--infra)} .a-cloud{--c:var(--cloud)}
+.flow-grid{display:grid;gap:18px}
+@media (min-width:720px){.flow-grid{grid-template-columns:1fr 1fr}}
+.flow h3{font-family:var(--disp);font-size:18px;margin:0 0 8px}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Schemat architektury · stan na 2026-09-07</div>
+  <h1>Stanowisko sebastian-AI</h1>
+  <p class="lead">Jeden laptop pod agentów, dwie subskrypcje (Anthropic i ChatGPT Plus), telefon jako pilot przez Tailscale. Poniżej warstwy od góry do dołu: kto z czym rozmawia.</p>
+  <div class="legend">
+    <span style="--c:var(--net)">telefon i sieć</span>
+    <span style="--c:var(--claude)">Claude / Anthropic</span>
+    <span style="--c:var(--codex)">Codex / OpenAI</span>
+    <span style="--c:var(--infra)">lokalne usługi</span>
+    <span style="--c:var(--cloud)">chmura i zewnętrzne</span>
+  </div>
+</header>
+
+<section class="tier t-net">
+  <h2>Telefon <small>realme GT 2 Pro · Android · 100.122.194.63</small></h2>
+  <div class="grid two">
+    <div class="box"><h3>claude-remote UI</h3><p>Przeglądarka na telefonie. Prompt wpisany w mobilnym UI trafia do Claude Code na laptopie, odpowiedź wraca strumieniem SSE.</p></div>
+    <div class="box"><h3>Aplikacje chmurowe</h3><p>ChatGPT (ten sam Plus co Codex, wspólna pula limitów), claude.ai/code (podgląd sesji i artefakty HTML), Gmail (maile z crona), GitHub (PR-y).</p></div>
+  </div>
+</section>
+
+<div class="link solid"><span>Tailscale VPN · tailnet prywatny · laptop widoczny jako <code>sebastian-ai</code> 100.86.102.40</span></div>
+
+<div class="laptop">
+  <h2>Laptop sebastian-AI <small>Ubuntu 24.04 · kernel 7.0</small></h2>
+  <p class="spec">Intel i7-13620H, 16 wątków, 30 GB RAM, bez działającego GPU. Dedykowany pod agentów: pełne uprawnienia, brak ręcznych potwierdzeń.</p>
+
+  <section class="tier t-net" style="margin-bottom:10px">
+    <h2>Wejście z telefonu <small>systemd · claude-remote.service</small></h2>
+    <div class="box"><h3>claude-remote <span class="tag">Flask · port 8080</span></h3>
+      <p>Uruchamia <code>claude</code> CLI jako podproces z flagą <code>--dangerously-skip-permissions</code> i streamuje odpowiedzi do telefonu. Pracuje w katalogu domowym, więc widzi wszystkie projekty.</p></div>
+  </section>
+
+  <div class="grid two">
+    <section class="tier t-claude">
+      <h2>Claude Code <small>2.1.263</small></h2>
+      <div class="stack">
+        <div class="box"><h3>Fable 5.1 <span class="tag">subskrypcja Anthropic</span></h3>
+          <p>Główny agent: kod, książka 1413, asystent, research. Subagenci (Redaktor, Korektor, reviewerzy) też na Fable przez Agent tool.</p></div>
+        <div class="box"><h3>Pamięć i konfiguracja</h3>
+          <ul>
+            <li>pamięć trwała: 57 wpisów (<code>~/.claude/projects/…/memory</code>)</li>
+            <li>skille własne: 1413-audyt, asystent, stoik-wieczor, genai-watch, mutation-probe, clean-code, grill-me + pakiet GSD (~70)</li>
+            <li>agenci własni: java-spring-reviewer, react-reviewer, fullstack-review-orchestrator, test-quality-reviewer</li>
+            <li>RTK: proxy oszczędzające tokeny na komendach shell</li>
+          </ul></div>
+        <div class="box"><h3>Serwery MCP</h3>
+          <ul>
+            <li><b>codex</b> → Codex CLI (delegacja do Astry)</li>
+            <li><b>playwright</b> → przeglądarka Chromium (testy UI)</li>
+            <li><b>semgrep</b> → skan bezpieczeństwa kodu</li>
+            <li><b>Google Drive</b> (claude.ai, wymaga ponownego logowania)</li>
+          </ul></div>
+      </div>
+    </section>
+
+    <section class="tier t-codex">
+      <h2>Codex CLI <small>0.153.4</small></h2>
+      <div class="stack">
+        <div class="box"><h3>GPT-6 Astra <span class="tag">ChatGPT Plus</span></h3>
+          <p>Drugi model do zadań trudnych, niezależnej weryfikacji i jako drugi Pisarz w książce. Login device-auth, bez klucza API. Reasoning effort ustawiany na <code>high</code> per zlecenie.</p></div>
+        <div class="box"><h3>$imagegen <span class="tag">gpt-image-2</span></h3>
+          <p>Generowanie i edycja obrazów w cenie Plusa. Jedyny generator obrazów w setupie. Moderacja blokuje sceny przemocy i pogrzeby.</p></div>
+        <div class="box"><h3>Sandbox i ślad</h3>
+          <ul>
+            <li>bubblewrap + profil AppArmor <code>/etc/apparmor.d/bwrap</code> (fix pod Ubuntu 24.04)</li>
+            <li>tryb workspace-write, w <code>exec</code> bez pytań</li>
+            <li>logi sesji JSONL w <code>~/.codex/sessions</code>, podgląd <code>codex-trace</code> z linią limitów 5 h / tydzień</li>
+          </ul></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="bridge">
+    <div class="arr"><b>Claude → Codex</b><i></i>MCP <code>codex</code> / <code>codex-reply</code> albo <code>codex exec … -o plik</code> w tle (nohup) · zlecenie w pliku w repo, bo Codex nie widzi sesji Claude</div>
+    <div class="arr"><b>Codex → Claude</b><i></i>wynik jako plik w repo + komunikat końcowy · redakcja, korekta i porównanie wersji wracają do Fable</div>
+  </div>
+
+  <section class="tier t-infra">
+    <h2>Lokalne usługi i automaty</h2>
+    <div class="grid three">
+      <div class="box"><h3>Cron → agent</h3>
+        <div class="cron">
+          <code>20:58</code><span>stoik: headless <code>claude -p</code> → mail wieczorny (msmtp)</span>
+          <code>21:17</code><span>Garmin sync → SQLite (GarminDB)</span>
+          <code>22:00</code><span>auto-commit bazy wiedzy MkDocs</span>
+        </div></div>
+      <div class="box"><h3>Docker</h3>
+        <ul>
+          <li>MongoDB 8 · 27017</li>
+          <li>Structurizr · 8087</li>
+          <li>mocki sdlc-analyzer (WireMock, mTLS) · 18443/18480</li>
+          <li>SonarQube (na żądanie)</li>
+        </ul></div>
+      <div class="box"><h3>Reszta</h3>
+        <ul>
+          <li>Ollama na CPU (Bielik 11B, Qwen3.5 27B, Mistral 7B, Ornith 9B): ~2 tok/s, nie do agentów</li>
+          <li>MkDocs baza wiedzy · 8082</li>
+          <li>IntelliJ IDEA, Maven/Java, Playwright Chromium</li>
+          <li>28 projektów w <code>~/apps</code>, książka w <code>~/books/1413</code></li>
+        </ul></div>
+    </div>
+  </section>
+</div>
+
+<div class="link"><span>internet · wychodzące połączenia z laptopa</span></div>
+
+<section class="tier t-cloud">
+  <h2>Chmura i usługi zewnętrzne</h2>
+  <div class="grid two">
+    <div class="box"><h3>Anthropic</h3><p>Modele Fable 5.1 (Claude Code i subagenci), claude.ai/code do śledzenia sesji z telefonu i hosting artefaktów HTML.</p></div>
+    <div class="box"><h3>OpenAI</h3><p>GPT-6 Astra i gpt-image-2 przez Codex CLI. Jedna pula limitów Plusa z aplikacją ChatGPT: okno 5 h plus limit tygodniowy.</p></div>
+    <div class="box"><h3>GitHub <span class="tag">wyhodujsam</span></h3><p>Repozytoria projektów i książki. Zawsze feature branch + PR, nigdy push do master. <code>gh</code> z keyringa.</p></div>
+    <div class="box"><h3>Pozostałe</h3><p>Gmail przez msmtp (maile od agentów), Garmin Connect (dane zdrowotne), Google Drive (MCP), Semgrep registry.</p></div>
+  </div>
+</section>
+
+
+<section class="flow">
+  <h2>Przepływy pracy</h2>
+  <p>Dwa typowe obiegi z tego tygodnia. Kolor kropki mówi, w której warstwie schematu dzieje się krok.</p>
+  <div class="flow-grid">
+  <div>
+  <h3>A. Obraz do sceny (Chełmno, kadr 3)</h3>
+  <ol class="steps">
+    <li class="a-net"><span class="who">telefon</span><p>„Wygeneruj jeszcze obrazy do tej sceny." Prompt idzie z mobilnego UI przez Tailscale do claude-remote.</p></li>
+    <li class="a-infra"><span class="who">claude-remote</span><p>Uruchamia <code>claude</code> w katalogu domowym i otwiera strumień SSE z powrotem na telefon.</p></li>
+    <li class="a-claude"><span class="who">Claude Code · Fable</span><p>Czyta tekst sceny i <b>kanoniczne opisy lokacji</b>, wybiera kadry, pisze prompty do pliku w repo <code>grafiki/PROMPTY-gpt-image.md</code> (wersje v1/v2/v3).</p><div class="meta">źródło spójności: research/2026-06-14-opisy-lokacji-do-promptow.md</div></li>
+    <li class="a-claude"><span class="who">Claude Code</span><p>Zleca w tle: <code>codex exec -m gpt-6-astra … -o wynik.md "Użyj $imagegen, przeczytaj plik promptów, zapisz PNG do grafiki/"</code>. Skrypt kończy się <code>exit 0</code>, Claude czeka na powiadomienie.</p><div class="meta">przed startem: codex-trace → LIMITY 5h / tydzień</div></li>
+    <li class="a-codex"><span class="who">Codex CLI · Astra</span><p>W sandboxie bwrap czyta plik promptów, wywołuje skill <b>$imagegen</b>, przenosi wynik z <code>~/.codex/generated_images</code> do repo.</p></li>
+    <li class="a-cloud"><span class="who">OpenAI · gpt-image-2</span><p>Generuje obraz. <b>Moderacja</b> na wyjściu: kadry z rannymi i pogrzeb odrzucone („violence"), przechodzi statyczny kadr bez kontaktu.</p><div class="meta">koszt: ~3–4% okna 5 h na obraz, wspólna pula z ChatGPT</div></li>
+    <li class="a-codex"><span class="who">Codex CLI</span><p>Odrzucenie → Claude łagodzi prompt (v2, v3) i zleca ponownie. Sukces → ścieżka PNG w komunikacie końcowym.</p></li>
+    <li class="a-claude"><span class="who">Claude Code · Fable</span><p>Ogląda PNG (Read), ocenia zgodność z kanonem lokacji, dopisuje KREDYTY.md, buduje stronę porównawczą i publikuje artefakt HTML.</p></li>
+    <li class="a-infra"><span class="who">git · GitHub</span><p>Commit na branch <code>tekst/12-chelmno</code>, push zweryfikowany przez SHA remote'a, obrazy widoczne w PR #44.</p></li>
+    <li class="a-net"><span class="who">telefon</span><p>Link do artefaktu w odpowiedzi SSE. Ocena kadrów i ewentualna poprawka („woda nie zamarznięta") → od kroku 4 w trybie <b>edycji</b> istniejącego obrazu.</p></li>
+  </ol>
+  </div>
+  <div>
+  <h3>B. Scena z Astrą jako Pisarzem</h3>
+  <ol class="steps">
+    <li class="a-net"><span class="who">telefon</span><p>„Wyślij do Astry polecenie napisania sceny jatki, brief jak dla naszego pisarza, redakcja i korekta w Fable."</p></li>
+    <li class="a-claude"><span class="who">Claude Code · Fable</span><p><b>Etap 0:</b> brief (funkcja, kanon, twarde ograniczenia z gotowej prozy), tło z planem karczmy, zlecenie z listą plików do przeczytania w kolejności i notą „mniej sarkazmu".</p></li>
+    <li class="a-claude"><span class="who">Claude Code</span><p><code>codex exec … -c model_reasoning_effort="high"</code> w tle przez nohup. Zlecenie jest samowystarczalne: Codex nie widzi sesji Claude.</p></li>
+    <li class="a-codex"><span class="who">Codex CLI · Astra</span><p>Czyta ~20 plików kanonu, pisze draft 5,5 tys. słów do <code>20-draft-astra.md</code>, raportuje sprzeczności w materiałach.</p><div class="meta">18 min · 2,9 M tokenów in · ~55% okna 5 h</div></li>
+    <li class="a-claude"><span class="who">Subagent · Redaktor (Fable)</span><p>Trzy osie (kanon, rejestr, dramaturgia) + przebieg powtórzeń. Raport 55 zmian i 10 punktów do decyzji autora.</p></li>
+    <li class="a-claude"><span class="who">Subagent · Korektor (Fable)</span><p>Tylko język. 9 pewnych poprawek naniesionych, 27 wątpliwych zostawionych autorowi.</p></li>
+    <li class="a-claude"><span class="who">Claude Code</span><p>Wersja końcowa do <code>tekst/12-chelmno.md</code>, renumeracja rozdziałów, rejestry (SCENY, WATKI, obietnice), strona diff draft ↔ finał.</p></li>
+    <li class="a-infra"><span class="who">git · GitHub</span><p>Branch <code>tekst/12-chelmno</code>, PR #44 otwarty na uwagi. Skill <code>/1413-audyt</code> przed merge.</p></li>
+    <li class="a-net"><span class="who">telefon</span><p>Czytanie porównania w artefakcie, decyzje autora (np. małpa → niedźwiednik) wracają jako kolejne prompty.</p></li>
+  </ol>
+  </div>
+  </div>
+</section>
+
+<p class="note"><b>Zasada podziału pracy.</b> Claude Code jest orkiestratorem i pamięcią: trzyma kontekst, decyduje, redaguje. Codex dostaje samowystarczalne zlecenia w plikach, gdy potrzebny jest drugi model, obraz albo niezależna weryfikacja. Telefon nie liczy nic sam: jest pilotem do laptopa przez Tailscale i oknem na chmurę.</p>
+</div>
+</body></html>
